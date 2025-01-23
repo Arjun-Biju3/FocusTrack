@@ -8,3 +8,10 @@ def about(request):
 
 def login_user(request):
     return render(request,'login.html')
+
+def signin_user(request):
+    return render(request,'signin.html')
+
+def courses(request):
+    return render(request,'courses.html')
+

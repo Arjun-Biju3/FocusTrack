@@ -1,0 +1,19 @@
+{% extends 'blank_layout.html' %}
+{% load static %}
+{% block content %}
+<div>
+    <div class="signup">
+        <div class="title"><p>SIGNUP</p></div>
+        <div class="contents">
+            <form id="signup-form" action="" method="post">
+                <input type="text" placeholder="Email">
+                <input type="text" placeholder="Phone">
+                <input type="text" placeholder="Program Enrolled">
+                <input type="text" placeholder="Password">
+                <button type="submit">SIGNUP</button>
+            </form>
+            <p>Already Registered? <a href="{% url 'login' %}">Login</a></p>
+        </div>
+    </div>
+  </div>
+{% endblock content %}

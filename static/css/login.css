@@ -55,3 +55,61 @@
 {
     background-color: #32bfcc;
 }
+
+.signup
+{
+    width: 300px;
+    height: 450px;
+    background-color: white;
+    margin-left: 40%;
+    margin-top: 6%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1); 
+}
+.title
+{
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+    color: #06BBCC;
+    width: 300px;
+    height: 80px;
+    padding-left: 10%;
+    padding-top: 12%;
+}
+.contents
+{
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+    padding-left: 10%;
+    padding-top: 7%;
+    
+}
+#signup-form
+{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+}
+#signup-form input
+{
+    width: 80%;
+    
+    
+}
+#signup-form button
+{
+    width: 80%;
+    border: none;
+    background-color: #06BBCC;
+    height: 40px;
+    color: white;
+}
+#signup-form button:hover
+{
+    background-color: #32bfcc;
+}
