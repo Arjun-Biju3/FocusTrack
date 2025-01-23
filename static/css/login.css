@@ -58,10 +58,10 @@
 
 .signup
 {
-    width: 300px;
+    width: 550px;
     height: 450px;
     background-color: white;
-    margin-left: 40%;
+    margin-left: 30%;
     margin-top: 6%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(0, 0, 0, 0.1); 
@@ -72,38 +72,48 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: larger;
     color: #06BBCC;
-    width: 300px;
+    width: 600px;
     height: 80px;
     padding-left: 10%;
-    padding-top: 12%;
+    padding-top: 8%;
+    display: flex;
+    flex-direction: row;
+    gap: 120px;
 }
 .contents
 {
 
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     height: auto;
     padding-left: 10%;
-    padding-top: 7%;
+    padding-top: 6%;
     
+}
+.one
+{
+    font-size: medium;
+    width: 100%;
+    color: red;
+    font-family: 'Courier New', Courier, monospace;
 }
 #signup-form
 {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 40px;
     
 }
-#signup-form input
+#signup-form input 
 {
-    width: 80%;
-    
+    width: 110%;
+    height: 40%;
     
 }
 #signup-form button
 {
-    width: 80%;
+    width: 90%;
     border: none;
     background-color: #06BBCC;
     height: 40px;
@@ -112,4 +122,91 @@
 #signup-form button:hover
 {
     background-color: #32bfcc;
+}
+.left
+{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.right
+{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+.inner-form
+{
+    display: flex;
+    flex-direction: row;
+    gap: 55px;
+}
+select
+{
+    width: 110%;
+    height: 40%;
+}
+
+.otp
+{
+    width: 300px;
+    height: 250px;
+    background-color: white;
+    margin-left: 40%;
+    margin-top: 8%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1); 
+}
+.otp-title
+{
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+    color: #06BBCC;
+    width: 300px;
+    height: 80px;
+    padding-left: 10%;
+    padding-top: 12%;
+}
+.otp-contents
+{
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: auto;
+    padding-left: 10%;
+    padding-top: 10%;
+    
+}
+#otp-form
+{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+}
+#otp-form input
+{
+    width: 80%;
+    
+    
+}
+#otp-form button
+{
+    width: 35%;
+    border: none;
+    background-color: #06BBCC;
+    height: 40px;
+    color: white;
+}
+#otp-form button:hover
+{
+    background-color: #32bfcc;
+}
+.btn-div-otp
+{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 }

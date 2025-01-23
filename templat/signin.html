@@ -3,15 +3,40 @@
 {% block content %}
 <div>
     <div class="signup">
-        <div class="title"><p>SIGNUP</p></div>
+        <div class="title"><p>SIGNUP</p> {% if messages %}{% for message in messages %}<p class="one">{{ message }}</p>{% endfor %}{% endif %}</div>
         <div class="contents">
             <form id="signup-form" action="" method="post">
-                <input type="text" placeholder="Email">
-                <input type="text" placeholder="Phone">
-                <input type="text" placeholder="Program Enrolled">
-                <input type="text" placeholder="Password">
+                {% csrf_token %}
+                <div class="inner-form">
+                    <div class="left">
+                        <input name="fname" type="text" placeholder="First Name">
+                        <input name="lname" type="text" placeholder="Last Name">
+                        <input name="email" type="text" placeholder="Email">
+                        <input name="phone" type="text" placeholder="Phone">
+                        </div>
+        
+                        <div class="right">
+                        <select name="gender" id="" >
+                            <option value="" selected disabled>Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="Not Applicable">Not Applicable</option>
+                        </select>
+                        <select id="country" name="country">
+                            <option value="" selected disabled>Select your country</option>
+                            <option value="us" >United States</option>
+                            <option value="fr" >France</option>
+                            <option value="in" >India</option>
+                            <option value="jp" >Japan</option>
+                            <option value="br" >Brazil</option>
+                          </select>
+                        <input name="program" type="text" placeholder="Program Enrolled">
+                        <input name="password" type="password" placeholder="Password">
+                        </div>
+                </div>
                 <button type="submit">SIGNUP</button>
             </form>
+            
             <p>Already Registered? <a href="{% url 'login' %}">Login</a></p>
         </div>
     </div>

@@ -1,0 +1,21 @@
+{% extends 'blank_layout.html' %}
+{% block content %}
+{% load static %}
+
+  <div>
+    <div class="otp">
+        <div class="otp-title"><p>VALIDATE</p></div>
+        <div class="otp-contents">
+            <form id="otp-form" action="" method="post">
+                {% csrf_token %}
+                <input type="otp" name="otp" placeholder="Enter otp">
+                
+                <div class="btn-div-otp">
+                    <button name="submit" type="submit">SUBMIT</button>
+                    <button name="resend" type="submit">RESEND</button></div>
+            </form>
+           
+        </div>
+    </div>
+  </div>
+{% endblock content %}
