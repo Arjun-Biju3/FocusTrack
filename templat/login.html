@@ -1,0 +1,17 @@
+{% extends 'blank_layout.html' %}
+{% block content %}
+{% load static %}
+  <div>
+    <div class="login">
+        <div class="title"><p>LOGIN</p></div>
+        <div class="contents">
+            <form id="login-form" action="" method="post">
+                <input type="text" placeholder="Username">
+                <input type="text" placeholder="Password">
+                <button type="submit">LOGIN</button>
+            </form>
+            <p>Not Registered? <a href="">SignUp</a></p>
+        </div>
+    </div>
+  </div>
+{% endblock content %}
