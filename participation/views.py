@@ -6,6 +6,25 @@ import socket
 from django.contrib import messages
 from datetime import datetime,timedelta
 from django.utils import timezone
+import os
+from django.conf import settings
+import cv2
+import numpy as np
+from PIL import Image
+import base64
+from io import BytesIO
+
+
+db_dir = os.path.join(settings.BASE_DIR, 'db')
+if not os.path.exists(db_dir):
+    os.mkdir(db_dir)
+
+
+def decode_image(image_data):
+    image_data = image_data.split(',')[1]
+    image = Image.open(BytesIO(base64.b64decode(image_data)))
+    image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+    return image
 
 def home(request):
     return render(request,'index.html')
@@ -16,9 +35,16 @@ def about(request):
 def login_user(request):
     return render(request,'login.html')
 
-
 def capture(request):
-    return render(request,'capture_image.html')
+    if request.method == 'POST':
+        username = "appu"  
+        image_data = request.POST.get('image')
+        image = decode_image(image_data)
+        user_dir = os.path.join(db_dir, username)
+        os.makedirs(user_dir, exist_ok=True)
+        filename = os.path.join(user_dir, f'{username}.jpg')
+        cv2.imwrite(filename, image)
+    return render(request, 'capture_image.html')
 
 def signin_user(request):
     if request.POST:
