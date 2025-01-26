@@ -1,57 +1,19 @@
 {% extends 'blank_layout.html' %}
 {% block content %}
 {% load static %}
-<style>
-  .otp {
-    width: 300px;
-    height: 250px;
-    background-color: white;
-    margin-left: 40%;
-    margin-top: 10%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(0, 0, 0, 0.1); 
-  }
 
-  .message-box {
-    max-width: 300px; 
-    background-color: #06BBCC; 
-    color: white;
-    padding: 15px 20px;
-    position: relative; 
-    border-radius: 8px; 
-    font-family: Arial, sans-serif; 
-    font-size: 14px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
-    margin: 20px; 
-  }
-
-  .message-box:after {
-    content: ""; 
-    position: absolute; 
-    right: -14px; 
-    top: 20px; 
-    width: 0; 
-    height: 0; 
-    border-style: solid; 
-    border-width: 10px 0 10px 15px; 
-    border-color: transparent transparent transparent #06BBCC; 
-  }
-
-  .messsage {
-    position: absolute;
-    right: 5%;
-    top: 20%; 
-    display: none;
-  }
-</style>
-
-<div class="messsage" id="message-container">
-  <div class="message-box">
+<link rel="stylesheet" href="{% static 'css/otp.css' %}">
+<div class="message" id="message-container">
+  {% if messages %}
     {% for message in messages %}
-      <p >{{ message }}</p>
-      {% endfor %}
-    </div>
-  </div>
+      {% if forloop.last %} {# Check if it's the first message #}
+        <div class="message-box {{ message.tags }}-box">
+          <p>{{ message }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>
 
 <div>
   <div class="otp">
@@ -69,5 +31,7 @@
     </div>
   </div>
 </div>
+
+<script src="{% static 'js/otp.js' %}" ></script>
 
 {% endblock content %}

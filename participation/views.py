@@ -13,6 +13,8 @@ import numpy as np
 from PIL import Image
 import base64
 from io import BytesIO
+from django.contrib.auth import authenticate,login,logout
+from django.core.files.base import ContentFile
 
 
 db_dir = os.path.join(settings.BASE_DIR, 'db')
@@ -27,23 +29,67 @@ def decode_image(image_data):
     return image
 
 def home(request):
-    return render(request,'index.html')
-
-def about(request):
-    return render(request,'about.html')
-
-def login_user(request):
-    return render(request,'login.html')
-
-def capture(request):
     if request.method == 'POST':
-        username = "appu"  
+        username = "hello" 
+        print(username)
         image_data = request.POST.get('image')
         image = decode_image(image_data)
         user_dir = os.path.join(db_dir, username)
         os.makedirs(user_dir, exist_ok=True)
         filename = os.path.join(user_dir, f'{username}.jpg')
         cv2.imwrite(filename, image)
+    return render(request,'index.html')
+
+def about(request):
+    return render(request,'about.html')
+
+def login_user(request):
+    if request.POST:
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user = authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('home')
+        else:
+            messages.error(request,"Invalid username or password")
+    return render(request,'login.html')
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')
+
+def capture(request):
+    if request.method == 'POST':
+        #capture image and save
+        username = request.session.get('email')  
+        image_data = request.POST.get('image')
+        image = decode_image(image_data)
+        user_dir = os.path.join(db_dir, username)
+        os.makedirs(user_dir, exist_ok=True)
+        filename = os.path.join(user_dir, f'{username}.jpg')
+        cv2.imwrite(filename, image)
+        #fetch user details
+        fname=request.session.get('fname')
+        lname=request.session.get('lname')
+        gender=request.session.get('gender')
+        country=request.session.get('country')
+        program=request.session.get('program')
+        phone=request.session.get('phone')
+        email=request.session.get('email')
+        password=request.session.get('password')
+        #create user
+        request.session.flush()
+        user=User.objects.create_user(username=email,password=password,email=email)
+        profile.objects.create(fname=fname,lname=lname,geder=gender,country=country,program=program,phone=phone,user=user)
+        #login user
+        user=authenticate(request,username=email,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('home')
+        else:
+            messages.error(request,"error in logging")
+            return redirect('login')
     return render(request, 'capture_image.html')
 
 def signin_user(request):
@@ -67,10 +113,6 @@ def signin_user(request):
             return redirect('otp')
         except socket.gaierror as e:
             messages.error(request,"please check your connection")
-
-        
-        # user=User.objects.create_user(username=email,password=password,email=email)
-        # profile.objects.create(fname=fname,lname=lname,geder=gender,country=country,program=program,phone=phone,user=user)
        
     return render(request,'signin.html')
 

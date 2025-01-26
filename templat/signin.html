@@ -1,9 +1,21 @@
 {% extends 'blank_layout.html' %}
 {% load static %}
 {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% if messages  %}
+  <div class="messsage" id="">
+    <div class="message-box" id="message-box">
+      {% for message in messages %}
+        <p >{{ message }}</p>
+        {% endfor %}
+      </div>
+    </div>
+{% endif %}
+
 <div>
     <div class="signup">
-        <div class="title"><p>SIGNUP</p> {% if messages %}{% for message in messages %}<p class="one">{{ message }}</p>{% endfor %}{% endif %}</div>
+        <div class="title"><p>SIGNUP</p></div>
         <div class="contents">
             <form id="signup-form" action="" method="post">
                 {% csrf_token %}
@@ -11,7 +23,7 @@
                     <div class="left">
                         <input name="fname" type="text" placeholder="First Name" required>
                         <input name="lname" type="text" placeholder="Last Name" required>
-                        <input name="email" type="text" placeholder="Email" required>
+                        <input name="email" type="email" placeholder="Email" required>
                         <input name="phone" type="text" placeholder="Phone" required>
                         </div>
         
@@ -41,4 +53,10 @@
         </div>
     </div>
   </div>
+
+
+
+    <script src="{% static 'js/signup.js' %}"></script>
+    
+
 {% endblock content %}
