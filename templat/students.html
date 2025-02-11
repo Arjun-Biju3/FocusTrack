@@ -1,0 +1,24 @@
+{% extends 'blank_layout.html' %}
+{% load static %}
+{% block navbar %}
+    {% include 'admin_nav.html' %}
+{% endblock navbar %}
+{% block content %}
+<div class="container py-5">
+    <h2 class="text-center mb-4">Student Details</h2>
+    <div class="row">
+        {% for student in students %}
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card service-item p-3 text-center">
+                <div class="card-body">
+                    <h5 class="fw-semi-bold">{{ student.fname }} {{ student.lname }}</h5>
+                    <p><strong>Course:</strong> {{ student.program }}</p>
+                    <p><strong>Phone:</strong> {{ student.phone }}</p>
+                    <p><strong>Email:</strong> {{ student.user.email }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

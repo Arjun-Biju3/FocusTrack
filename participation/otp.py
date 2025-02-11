@@ -12,7 +12,7 @@ def generate_otp(length=6):
 def send_email(to,otp):
     msg=EmailMessage()
     subject="Register"
-    body=f"Your otp for IVPE registration is {otp}.Please do not share it with any one"
+    body=f"Your otp for Elearning registration is {otp}.Please do not share it with any one"
     msg.set_content(body)
     msg['subject'] = subject
     msg['to'] = to

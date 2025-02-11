@@ -34,7 +34,9 @@
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
+   {% block navbar %}
       {% include 'navbar.html' %}
+    {% endblock navbar %}
     {% block content %}
       {% include 'spinner.html' %}
       {% include 'Carousel.html' %}
