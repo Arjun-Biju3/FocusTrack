@@ -21,12 +21,7 @@ def add_course(request):
     return render(request,'add_courses.html')
 
 def add_teacher(request):
-    if request.method == "POST":
-        fname = request.POST.get('fname')
-        lname = request.POST.get('lname')
-        email = request.POST.get('email')
-        subject = request.POST.get('subject')
-        phone = request.POST.get('phone')
+   
 
         # Create user and teacher
         user = User.objects.create(username=email, email=email,is_staff =True)
