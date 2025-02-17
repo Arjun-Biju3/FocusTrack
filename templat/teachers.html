@@ -4,7 +4,42 @@
     {% include 'admin_nav.html' %}
 {% endblock navbar %}
 {% block content %}
-
-    <h2 class="text-center mb-4">TEACHERS</h2>
-    
+<style>
+    .messsage {
+        position: absolute;
+        right: 5%;
+        top: 10%; 
+      }
+</style>
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% if messages  %}
+  <div class="messsage" id="">
+    <div class="message-box" id="message-box">
+      {% for message in messages %}
+        <p >{{ message }}</p>
+        {% endfor %}
+      </div>
+    </div>
+{% endif %}
+<div class="container py-5">
+    <h2 class="text-center mb-4">Teacher Details</h2>
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{% url 'add_teacher' %}" class="btn btn-primary">Add New Teacher</a>
+    </div>
+    <div class="row">
+        {% for teacher in teachers %}
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card service-item p-3 text-center">
+                <div class="card-body">
+                    <h5 class="fw-semi-bold">{{ teacher.fname }} {{ teacher.lname }}</h5>
+                    <p><strong>Subject:</strong> {{ teacher.subject }}</p>
+                    <p><strong>Phone:</strong> {{ teacher.phone }}</p>
+                    <p><strong>Email:</strong> {{ teacher.user.email }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="{% static 'js/signup.js' %}"></script>    
 {% endblock %}
