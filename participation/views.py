@@ -17,6 +17,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.core.files.base import ContentFile
 import subprocess
 import datetime
+from participation.distraction_detection import *
 
 db_dir = os.path.join(settings.BASE_DIR, 'db')
 if not os.path.exists(db_dir):
@@ -36,10 +37,8 @@ def home(request):
         folder_name = username
         folder_path = os.path.join(db_dir, folder_name)
         log_path = os.path.join(folder_path, 'log.txt')
-        unknown_img_path = os.path.join(settings.BASE_DIR, '.tmp.jpg')
+        unknown_img_path = os.path.join(folder_path, '.tmp.jpg')
         
-        if not image_data:
-            print("image not found")
             
         try:
             image_data = image_data.split(',')[1]
@@ -47,6 +46,13 @@ def home(request):
             image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
             cv2.imwrite(unknown_img_path, image)
             
+            prediction, scores = predict_distraction()
+            with open(log_path, 'a') as f:
+                f.write(f'{prediction} {datetime.datetime.now()}\n') 
+            
+            if not image_data:
+                print("image not found")
+                
             #run recognition
             output = subprocess.check_output(['face_recognition', folder_path, unknown_img_path])
             output = output.decode('utf-8').strip()
@@ -57,8 +63,13 @@ def home(request):
                 with open(log_path, 'a') as f:
                     f.write(f'{name},Not active,{datetime.datetime.now()}\n')
             elif name == username:
+                #run distraction detection
+                prediction, scores = predict_distraction()
+                if prediction is not None:
+                    print(f"Prediction: {prediction}, Scores: {scores}")
                 with open(log_path, 'a') as f:
                     f.write(f'{name},Active,{datetime.datetime.now()}\n')
+                    f.write(f'{prediction},Active,{datetime.datetime.now()}\n')  
         except Exception as e:
             print(f"Error: {e}")
         finally:
